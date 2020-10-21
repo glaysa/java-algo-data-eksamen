@@ -112,7 +112,22 @@ public class EksamenSBinTre<T> {
     }
 
     public int antall(T verdi) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        Objects.requireNonNull(verdi,"Ulovlig med nullverdier");
+        Node<T> p = rot;
+        int antall = 0;
+
+        while(p != null){
+            int cmp = comp.compare(verdi,p.verdi);
+            if(cmp == 0){
+                p = p.venstre;
+                antall++;
+            } else if(cmp < 0){
+                p = p.venstre;
+            } else {
+                p = p.høyre;
+            }
+        }
+        return antall;
     }
 
     public void nullstill() {
