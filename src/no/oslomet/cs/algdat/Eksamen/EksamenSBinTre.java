@@ -135,11 +135,18 @@ public class EksamenSBinTre<T> {
     }
 
     private static <T> Node<T> førstePostorden(Node<T> p) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        Node<T> q = p;
+        while (q.venstre != null) {
+            q = q.venstre;
+            if(q.venstre == null && q.høyre != null){
+                q = q.høyre;
+            }
+        }
+        return q;
     }
 
     private static <T> Node<T> nestePostorden(Node<T> p) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        return førstePostorden(p).forelder;
     }
 
     public void postorden(Oppgave<? super T> oppgave) {
