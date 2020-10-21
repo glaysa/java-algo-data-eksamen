@@ -146,10 +146,13 @@ public class EksamenSBinTre<T> {
     }
 
     private static <T> Node<T> nestePostorden(Node<T> p) {
-        Node<T> rot = førstePostorden(p).forelder;
+        Objects.requireNonNull(p, "Olovlig med nullverdier");
+        Node<T> rot = førstePostorden(p);
         Node<T> f = rot.forelder;
         if(f.venstre == rot){
             rot = rot.forelder.høyre;
+        } else {
+            rot = f;
         }
         return rot;
     }
