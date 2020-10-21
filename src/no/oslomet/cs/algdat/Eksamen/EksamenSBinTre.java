@@ -146,7 +146,12 @@ public class EksamenSBinTre<T> {
     }
 
     private static <T> Node<T> nestePostorden(Node<T> p) {
-        return førstePostorden(p).forelder;
+        Node<T> rot = førstePostorden(p).forelder;
+        Node<T> f = rot.forelder;
+        if(f.venstre == rot){
+            rot = rot.forelder.høyre;
+        }
+        return rot;
     }
 
     public void postorden(Oppgave<? super T> oppgave) {
