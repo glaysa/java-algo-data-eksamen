@@ -4,7 +4,7 @@ import java.util.Comparator;
 
 public class Main {
     public static void main(String[] args){
-        Integer[] a = {12,5,4,3,8,7,10,6,15,13,17,16,20};
+        Integer[] a = {10,10,10,10};
         EksamenSBinTre<Integer> tre = new EksamenSBinTre<>(Comparator.naturalOrder());
         for (int verdi : a) tre.leggInn(verdi);
         System.out.println(tre.antall()); // Utskrift: 10

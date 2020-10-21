@@ -137,12 +137,22 @@ public class EksamenSBinTre<T> {
     private static <T> Node<T> førstePostorden(Node<T> p) {
         Objects.requireNonNull(p,"Ulovlig med nullverdier");
         Node<T> q = p;
-        while (q.venstre != null) {
-            q = q.venstre;
-            if(q.venstre == null && q.høyre != null){
+        if(q.venstre != null){
+            while (q.venstre != null) {
+                q = q.venstre;
+                if(q.venstre == null && q.høyre != null){
+                    q = q.høyre;
+                }
+            }
+        } else {
+            while(q.høyre != null){
                 q = q.høyre;
+                if(q.venstre != null){
+                    q = q.venstre;
+                }
             }
         }
+
         return q;
     }
 
