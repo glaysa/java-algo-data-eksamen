@@ -148,6 +148,8 @@ public class EksamenSBinTre<T> {
     private static <T> Node<T> nestePostorden(Node<T> p) {
         Objects.requireNonNull(p, "Olovlig med nullverdier");
         Node<T> rot = p;
+        if(rot.forelder == null) return null;
+
         Node<T> f = rot.forelder;
         if(f.venstre == rot){
             rot = rot.forelder.høyre;
