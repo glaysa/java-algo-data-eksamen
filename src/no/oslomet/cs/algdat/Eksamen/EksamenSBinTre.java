@@ -166,8 +166,13 @@ public class EksamenSBinTre<T> {
         if (fh == null || fh == p) return f;
 
         Node<T> curr = f.høyre;
-        while (curr.venstre != null)
-            curr = curr.venstre;
+        if(curr.venstre != null) {
+            while (curr.venstre != null)
+                curr = curr.venstre;
+        } else {
+            while (curr.høyre != null)
+                curr = curr.høyre;
+        }
 
         return curr;
     }
