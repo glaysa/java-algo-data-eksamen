@@ -119,7 +119,7 @@ public class EksamenSBinTre<T> {
         while(p != null){
             int cmp = comp.compare(verdi,p.verdi);
             if(cmp == 0){
-                p = p.venstre;
+                p = p.høyre;
                 antall++;
             } else if(cmp < 0){
                 p = p.venstre;
