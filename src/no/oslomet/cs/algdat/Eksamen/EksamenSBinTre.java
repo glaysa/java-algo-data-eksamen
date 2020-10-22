@@ -200,13 +200,13 @@ public class EksamenSBinTre<T> {
         ArrayList<T> list = new ArrayList<>();
         if(rot == null) return null;
 
-        Queue<T> ko = new ArrayDeque<>();
-        ko.add(rot.verdi);
+        Queue<Node<T>> ko = new ArrayDeque<>();
+        ko.add(rot);
         while(!ko.isEmpty()){
-            T item = ko.poll();
-            list.add(item);
-            if(rot.venstre.verdi != null) list.add(rot.venstre.verdi);
-            if(rot.høyre.verdi != null) list.add(rot.høyre.verdi);
+            Node<T> item = ko.poll();
+            list.add(item.verdi);
+            if(item.venstre != null) ko.add(item.venstre);
+            if(item.høyre != null) ko.add(item.høyre);
         }
         return list;
     }
