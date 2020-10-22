@@ -8,7 +8,5 @@ public class Main {
         int[] a = {10, 6, 14, 1, 8, 12, 3, 7, 9, 11, 13, 2, 5, 4};
         int[] b = {10,10,2,10,10};
         for (int verdi : a) tre.leggInn(verdi);
-
-        System.out.println(tre.serialize().toString());
     }
 }
