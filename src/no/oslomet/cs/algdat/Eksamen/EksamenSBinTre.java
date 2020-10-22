@@ -193,6 +193,7 @@ public class EksamenSBinTre<T> {
         if(p == null) return;
         postordenRecursive(p.venstre,oppgave);
         postordenRecursive(p.høyre,oppgave);
+        oppgave.utførOppgave(p.verdi);
     }
 
     public ArrayList<T> serialize() {
