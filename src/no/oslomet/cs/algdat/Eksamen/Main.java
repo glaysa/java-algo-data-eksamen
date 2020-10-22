@@ -1,5 +1,6 @@
 package no.oslomet.cs.algdat.Eksamen;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 
 public class Main {
@@ -8,5 +9,10 @@ public class Main {
         int[] a = {10, 6, 14, 1, 8, 12, 3, 7, 9, 11, 13, 2, 5, 4};
         int[] b = {10,10,2,10,10};
         for (int verdi : a) tre.leggInn(verdi);
+
+        ArrayList<Integer> s = tre.serialize();
+        EksamenSBinTre.deserialize(s,Comparator.naturalOrder());
+        System.out.println();
+        System.out.print(tre.toStringPostOrder());
     }
 }

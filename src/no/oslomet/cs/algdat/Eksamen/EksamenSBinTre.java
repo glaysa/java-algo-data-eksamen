@@ -197,11 +197,21 @@ public class EksamenSBinTre<T> {
     }
 
     public ArrayList<T> serialize() {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        ArrayList<T> kompakt = new ArrayList<>();
+        Node<T> r = førstePostorden(rot);
+        while(r != null){
+            kompakt.add(r.verdi);
+            r = nestePostorden(r);
+        }
+        System.out.println( "Ser: " + kompakt.toString());
+        return kompakt;
     }
 
     static <K> EksamenSBinTre<K> deserialize(ArrayList<K> data, Comparator<? super K> c) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        EksamenSBinTre<K> tre = new EksamenSBinTre<>(c);
+        for (K datum : data) tre.leggInn(datum);
+        System.out.println("Des: " + tre.toStringPostOrder());
+        return tre;
     }
 
 
