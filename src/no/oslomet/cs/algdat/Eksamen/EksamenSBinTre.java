@@ -190,7 +190,9 @@ public class EksamenSBinTre<T> {
     }
 
     private void postordenRecursive(Node<T> p, Oppgave<? super T> oppgave) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        if(p == null) return;
+        postordenRecursive(p.venstre,oppgave);
+        postordenRecursive(p.høyre,oppgave);
     }
 
     public ArrayList<T> serialize() {
