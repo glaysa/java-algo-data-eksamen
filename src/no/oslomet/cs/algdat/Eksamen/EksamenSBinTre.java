@@ -197,20 +197,21 @@ public class EksamenSBinTre<T> {
     }
 
     public ArrayList<T> serialize() {
-        ArrayList<T> kompakt = new ArrayList<>();
-        Node<T> r = førstePostorden(rot);
-        while(r != null){
-            kompakt.add(r.verdi);
-            r = nestePostorden(r);
+        ArrayList<T> list = new ArrayList<>();
+        if(rot == null) return null;
+
+        Queue<T> ko = new ArrayDeque<>();
+        ko.add(rot.verdi);
+        while(!ko.isEmpty()){
+            T item = ko.poll();
+            list.add(item);
         }
-        System.out.println( "Ser: " + kompakt.toString());
-        return kompakt;
+        return list;
     }
 
     static <K> EksamenSBinTre<K> deserialize(ArrayList<K> data, Comparator<? super K> c) {
         EksamenSBinTre<K> tre = new EksamenSBinTre<>(c);
         for (K datum : data) tre.leggInn(datum);
-        System.out.println("Des: " + tre.toStringPostOrder());
         return tre;
     }
 
