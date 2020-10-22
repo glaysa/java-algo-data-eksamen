@@ -205,6 +205,8 @@ public class EksamenSBinTre<T> {
         while(!ko.isEmpty()){
             T item = ko.poll();
             list.add(item);
+            if(rot.venstre.verdi != null) list.add(rot.venstre.verdi);
+            if(rot.høyre.verdi != null) list.add(rot.høyre.verdi);
         }
         return list;
     }
