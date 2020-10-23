@@ -107,7 +107,7 @@ public class EksamenSBinTre<T> {
         if (verdi == null) return false;
 
         Node<T> p = rot;
-        Node<T> q = null;
+        Node<T> q = rot.forelder;
 
         while (p != null) {
             int cmp = comp.compare(verdi,p.verdi);      // sammenligner
@@ -139,8 +139,8 @@ public class EksamenSBinTre<T> {
 
             if (s != p) s.venstre = r.høyre;
             else s.høyre = r.høyre;
-            s.høyre.forelder = s;
         }
+
         antall--;
         return true;
     }
@@ -209,23 +209,15 @@ public class EksamenSBinTre<T> {
     }
 
     private static <T> Node<T> nestePostorden(Node<T> p) {
-        Objects.requireNonNull(p, "Olovlig med nullverdier");
-        if(p.forelder == null) return null;
+        if (p.forelder == null) return null;
 
-        Node<T> f = p.forelder;
-        Node<T> fh = f.høyre;
-
-        if (fh == null || fh == p) return f;
-
-        Node<T> curr = f.høyre;
-        if(curr.venstre != null) {
-            while (curr.venstre != null) curr = curr.venstre;
-            return curr;
-        } else if(curr.høyre != null) {
-            return førstePostorden(curr.høyre);
+        if (p.forelder.høyre == p){
+            return p.forelder;
+        } else if (p.forelder.høyre == null){
+            return p.forelder;
+        } else {
+            return førstePostorden(p.forelder.høyre);
         }
-
-        return curr;
     }
 
     public void postorden(Oppgave<? super T> oppgave) {
