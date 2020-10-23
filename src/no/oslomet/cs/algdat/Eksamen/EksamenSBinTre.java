@@ -139,9 +139,7 @@ public class EksamenSBinTre<T> {
 
             if (s != p) s.venstre = r.høyre;
             else s.høyre = r.høyre;
-            s.forelder = p.forelder;
         }
-
         antall--;
         return true;
     }
