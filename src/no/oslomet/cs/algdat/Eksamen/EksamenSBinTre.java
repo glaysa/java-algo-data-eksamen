@@ -124,6 +124,7 @@ public class EksamenSBinTre<T> {
             if (p == rot) rot = b;
             else if (p == q.venstre) q.venstre = b;
             else q.høyre = b;
+            if(b != null) b.forelder = q;
         }
 
         // Tilfelle 3
@@ -138,6 +139,7 @@ public class EksamenSBinTre<T> {
 
             if (s != p) s.venstre = r.høyre;
             else s.høyre = r.høyre;
+            s.forelder = p.forelder;
         }
 
         antall--;
