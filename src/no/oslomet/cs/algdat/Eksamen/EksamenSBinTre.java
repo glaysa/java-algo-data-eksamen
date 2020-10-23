@@ -213,11 +213,10 @@ public class EksamenSBinTre<T> {
 
         Node<T> curr = f.høyre;
         if(curr.venstre != null) {
-            while (curr.venstre != null)
-                curr = curr.venstre;
-        } else {
-            while (curr.høyre != null)
-                curr = curr.høyre;
+            while (curr.venstre != null) curr = curr.venstre;
+            return curr;
+        } else if(curr.høyre != null) {
+            return førstePostorden(curr.høyre);
         }
 
         return curr;
