@@ -194,7 +194,7 @@ public class EksamenSBinTre<T> {
             while(q.høyre != null){
                 q = q.høyre;
                 if(q.venstre != null){
-                    q = q.venstre;
+                    q = førstePostorden(q);
                 }
             }
         }
