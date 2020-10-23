@@ -104,7 +104,44 @@ public class EksamenSBinTre<T> {
     }
 
     public boolean fjern(T verdi) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        if (verdi == null) return false;
+
+        Node<T> p = rot;
+        Node<T> q = null;
+
+        while (p != null) {
+            int cmp = comp.compare(verdi,p.verdi);      // sammenligner
+            if (cmp < 0) { q = p; p = p.venstre; }      // går til venstre
+            else if (cmp > 0) { q = p; p = p.høyre; }   // går til høyre
+            else break;    // den søkte verdien ligger i p
+        }
+
+        if (p == null) return false;   // finner ikke verdi
+
+        // Tilfelle 1 og 2
+        if (p.venstre == null || p.høyre == null) {
+            Node<T> b = p.venstre != null ? p.venstre : p.høyre;
+            if (p == rot) rot = b;
+            else if (p == q.venstre) q.venstre = b;
+            else q.høyre = b;
+        }
+
+        // Tilfelle 3
+        else {
+            Node<T> s = p, r = p.høyre;   // finner neste i inorden
+            while (r.venstre != null){
+                s = r;    // s er forelder til r
+                r = r.venstre;
+            }
+
+            p.verdi = r.verdi;   // kopierer verdien i r til p
+
+            if (s != p) s.venstre = r.høyre;
+            else s.høyre = r.høyre;
+        }
+
+        antall--;
+        return true;
     }
 
     public int fjernAlle(T verdi) {
