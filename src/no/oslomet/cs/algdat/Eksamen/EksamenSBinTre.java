@@ -187,25 +187,13 @@ public class EksamenSBinTre<T> {
     }
 
     private static <T> Node<T> førstePostorden(Node<T> p) {
-        Objects.requireNonNull(p,"Ulovlig med nullverdier");
-        Node<T> q = p;
-        if(q.venstre != null){
-            while (q.venstre != null) {
-                q = q.venstre;
-                if(q.venstre == null && q.høyre != null){
-                    q = q.høyre;
-                }
-            }
+        if (p.venstre != null){
+            return førstePostorden(p.venstre);
+        } else if (p.høyre != null){
+            return førstePostorden(p.høyre);
         } else {
-            while(q.høyre != null){
-                q = q.høyre;
-                if(q.venstre != null){
-                    q = førstePostorden(q);
-                }
-            }
+            return p;
         }
-
-        return q;
     }
 
     private static <T> Node<T> nestePostorden(Node<T> p) {
