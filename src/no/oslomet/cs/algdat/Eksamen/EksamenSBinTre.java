@@ -1,6 +1,5 @@
 package no.oslomet.cs.algdat.Eksamen;
 
-
 import java.util.*;
 
 public class EksamenSBinTre<T> {
