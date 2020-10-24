@@ -99,6 +99,7 @@ public class EksamenSBinTre<T> {
         else q.høyre = p;
 
         antall++;
+        endringer++;
         return true;
     }
 
@@ -142,6 +143,7 @@ public class EksamenSBinTre<T> {
         }
 
         antall--;
+        endringer++;
         return true;
     }
 
@@ -152,6 +154,7 @@ public class EksamenSBinTre<T> {
         while(antall(verdi) > 0){
             fjern(verdi);
             antall++;
+            endringer++;
         }
         return antall;
     }
@@ -183,6 +186,7 @@ public class EksamenSBinTre<T> {
         while(r != null){
             r.verdi = null;
             antall--;
+            endringer++;
             r = nestePostorden(r);
         }
         rot = null;
