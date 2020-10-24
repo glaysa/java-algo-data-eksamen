@@ -148,14 +148,17 @@ public class EksamenSBinTre<T> {
 
     public int fjernAlle(T verdi) {
         if (verdi == null) return 0;
-        int antall = 0;
+        int teller = 0;
 
+        // Så lenge antall forekomster av gitt verdi er større enn null
+        // fjern verdien
         while(antall(verdi) > 0){
             fjern(verdi);
-            antall++;
+            teller++;
             endringer++;
         }
-        return antall;
+
+        return teller;
     }
 
     public int antall(T verdi) {
@@ -165,6 +168,8 @@ public class EksamenSBinTre<T> {
 
         while(p != null){
             int cmp = comp.compare(verdi,p.verdi);
+
+            // Hvis verdien har en duplikat gå ned til høyre barn og økt antall
             if(cmp == 0){
                 p = p.høyre;
                 antall++;
@@ -202,19 +207,29 @@ public class EksamenSBinTre<T> {
     }
 
     private static <T> Node<T> nestePostorden(Node<T> p) {
+        // Hvis treet har 0 eller 1 node
         if (p.forelder == null) return null;
 
+        // Hvis p er høyre barn
         if (p.forelder.høyre == p){
             return p.forelder;
+
+        // Hvis p er venstre barn og sin foreldre har ikke en høyre barn
         } else if (p.forelder.høyre == null){
             return p.forelder;
+
+        // Hvis p er har et subtre
         } else {
             return førstePostorden(p.forelder.høyre);
         }
     }
 
     public void postorden(Oppgave<? super T> oppgave) {
+        // Finn rot noden til postorden
         Node<T> r = førstePostorden(rot);
+
+        // Traverserer ved hjelp av en while-loop og nestePostorden metoden
+        // samtidig printer ut nodenes verdi
         while(r != null){
             oppgave.utførOppgave(r.verdi);
             r = nestePostorden(r);
@@ -239,9 +254,16 @@ public class EksamenSBinTre<T> {
         Queue<Node<T>> kø = new ArrayDeque<>();
         kø.add(rot);
         while(!kø.isEmpty()){
+            // Fjern noden men også lagre den i en variabel
             Node<T> node = kø.poll();
+
+            // Legg fjernet nodens verdi i arraylisten
             list.add(node.verdi);
+
+            // Hvis nodens.venstre er ikke null, legg den i køen
             if(node.venstre != null) kø.add(node.venstre);
+
+            // Hvis nodens.høyre er ikke null, legg den i køen
             if(node.høyre != null) kø.add(node.høyre);
         }
         return list;
