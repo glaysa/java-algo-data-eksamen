@@ -14,7 +14,7 @@ Se oblig-tekst for alle krav, og husk spesielt på følgende:
 
 # Beskrivelse av oppgaveløsning (4-8 linjer/setninger per oppgave)
 
-Vi har brukt git til å dokumentere arbeidet vårt. Jeg har 16 commits totalt, og hver logg-melding beskriver det jeg har gjort av endringer.
+Jeg har brukt git til å dokumentere arbeidet mitt. Jeg har 40 commits totalt, og hver logg-melding beskriver det jeg har gjort av endringer.
 
 * Oppgave 1:  ``leggInn(T verdi)`` - Oppgaven er løst ved å kopiere koden fra kompendiet 5.3 3a, men i tillegg har gjort endringene som trengs for at referanse
              'forelder' får riktig verdi.
