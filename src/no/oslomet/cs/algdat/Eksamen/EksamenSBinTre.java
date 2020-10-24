@@ -4,13 +4,14 @@ package no.oslomet.cs.algdat.Eksamen;
 import java.util.*;
 
 public class EksamenSBinTre<T> {
-    private static final class Node<T>   // en indre nodeklasse
-    {
-        private T verdi;                   // nodens verdi
-        private Node<T> venstre, høyre;    // venstre og høyre barn
-        private Node<T> forelder;          // forelder
 
-        // konstruktør
+    // Node klasse
+    private static final class Node<T> {
+        private T verdi;
+        private Node<T> venstre, høyre;
+        private Node<T> forelder;
+
+        // Node konstruktør
         private Node(T verdi, Node<T> v, Node<T> h, Node<T> forelder) {
             this.verdi = verdi;
             venstre = v;
@@ -18,8 +19,7 @@ public class EksamenSBinTre<T> {
             this.forelder = forelder;
         }
 
-        private Node(T verdi, Node<T> forelder)  // konstruktør
-        {
+        private Node(T verdi, Node<T> forelder) {
             this(verdi, null, null, forelder);
         }
 
@@ -28,16 +28,15 @@ public class EksamenSBinTre<T> {
             return "" + verdi;
         }
 
-    } // class Node
+    }
 
-    private Node<T> rot;                            // peker til rotnoden
-    private int antall;                             // antall noder
-    private int endringer;                          // antall endringer
+    private Node<T> rot;
+    private int antall;
+    private int endringer;
+    private final Comparator<? super T> comp;
 
-    private final Comparator<? super T> comp;       // komparator
-
-    public EksamenSBinTre(Comparator<? super T> c)    // konstruktør
-    {
+    // Konstruktør
+    public EksamenSBinTre(Comparator<? super T> c) {
         rot = null;
         antall = 0;
         comp = c;
@@ -67,7 +66,7 @@ public class EksamenSBinTre<T> {
 
         StringJoiner s = new StringJoiner(", ", "[", "]");
 
-        Node<T> p = førstePostorden(rot); // går til den første i postorden
+        Node<T> p = førstePostorden(rot);
         while (p != null) {
             s.add(p.verdi.toString());
             p = nestePostorden(p);
@@ -94,7 +93,7 @@ public class EksamenSBinTre<T> {
             p = cmp < 0 ? p.venstre : p.høyre;
         }
 
-        p = new Node<>(verdi,q);
+        p = new Node<>(verdi,q); // Satt på riktig foreldre referanse
         if (q == null) rot = p;
         else if (cmp < 0) q.venstre = p;
         else q.høyre = p;
@@ -104,19 +103,21 @@ public class EksamenSBinTre<T> {
     }
 
     public boolean fjern(T verdi) {
+        // Koden er kopiert fra kompendiet 5.2 8d
         if (verdi == null) return false;
 
         Node<T> p = rot;
         Node<T> q = rot.forelder;
 
+        // Finner verdien som skal fjernes
         while (p != null) {
-            int cmp = comp.compare(verdi,p.verdi);      // sammenligner
-            if (cmp < 0) { q = p; p = p.venstre; }      // går til venstre
-            else if (cmp > 0) { q = p; p = p.høyre; }   // går til høyre
-            else break;    // den søkte verdien ligger i p
+            int cmp = comp.compare(verdi,p.verdi);
+            if (cmp < 0) { q = p; p = p.venstre; }
+            else if (cmp > 0) { q = p; p = p.høyre; }
+            else break;
         }
 
-        if (p == null) return false;   // finner ikke verdi
+        if (p == null) return false;
 
         // Tilfelle 1 og 2
         if (p.venstre == null || p.høyre == null) {
@@ -124,19 +125,18 @@ public class EksamenSBinTre<T> {
             if (p == rot) rot = b;
             else if (p == q.venstre) q.venstre = b;
             else q.høyre = b;
-            if(b != null) b.forelder = q;
+            if(b != null) b.forelder = q; // Satt på riktig forelde referanse
         }
 
         // Tilfelle 3
         else {
-            Node<T> s = p, r = p.høyre;   // finner neste i inorden
+            Node<T> s = p, r = p.høyre;
             while (r.venstre != null){
-                s = r;    // s er forelder til r
+                s = r;
                 r = r.venstre;
             }
 
-            p.verdi = r.verdi;   // kopierer verdien i r til p
-
+            p.verdi = r.verdi;
             if (s != p) s.venstre = r.høyre;
             else s.høyre = r.høyre;
         }
@@ -178,6 +178,8 @@ public class EksamenSBinTre<T> {
     public void nullstill() {
         if(tom()) return;
         Node<T> r = førstePostorden(rot);
+
+        // Setter alle nodens verdi til null
         while(r != null){
             r.verdi = null;
             antall--;
@@ -231,13 +233,13 @@ public class EksamenSBinTre<T> {
         ArrayList<T> list = new ArrayList<>();
         if(rot == null) return null;
 
-        Queue<Node<T>> ko = new ArrayDeque<>();
-        ko.add(rot);
-        while(!ko.isEmpty()){
-            Node<T> item = ko.poll();
-            list.add(item.verdi);
-            if(item.venstre != null) ko.add(item.venstre);
-            if(item.høyre != null) ko.add(item.høyre);
+        Queue<Node<T>> kø = new ArrayDeque<>();
+        kø.add(rot);
+        while(!kø.isEmpty()){
+            Node<T> node = kø.poll();
+            list.add(node.verdi);
+            if(node.venstre != null) kø.add(node.venstre);
+            if(node.høyre != null) kø.add(node.høyre);
         }
         return list;
     }
