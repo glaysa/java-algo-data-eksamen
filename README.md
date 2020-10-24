@@ -29,7 +29,7 @@ Jeg har brukt git til å dokumentere arbeidet mitt. Jeg har 40 commits totalt, o
     1. `p.forelder` er `null` - hvis p sin foreldre er null betyr det at treet inneholder 0 eller en node.
     2. `p.forelder.høyre` er lik `p` - hvis p er høyre barn betyr det at neste noden i postorden blir p sin foreldre.
     3. `p.forelder.høyre` er lik `null` - hvis p er venstre barn uten en subtre og sin foreldre har ikke en høyre barn, neste noden i postorden blir `p.forelder`.
-    4. Hvis ingen av de er sant, kjører else-blokken som kaller på `førstePostorden(Node T)` - hvis p er venstre barn med en subtre må vi finne sin førstePostorden noden.
+    4. Hvis ingen av de er sant, kjører else-blokken som kaller på `førstePostorden(Node T)` - hvis p har et subtre må vi finne sin førstePostorden noden.
 		
 * Oppgave 4a: `postorden(Oppgave o)` - Metoden er implementert ved hjelp av `førstePostorden(Node p)` og `nestePostorden(Node p)`. Først finner vi rot noden i en postorden rekkefølge ved hjelp av `færstePostorden(Node p)` og bruker en while-loop til å traversere gjennom treet ved hjelp av `nestePostorden(Node p)`. I while-loopen kaller vi `Oppgave o` til å printe ut verdien til hver node.
 
